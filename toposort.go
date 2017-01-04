@@ -61,8 +61,8 @@ func (g *Graph) RemoveEdge(from, to string) bool {
 
 func (g *Graph) Toposort() ([]string, bool) {
 	L := make([]string, 0, len(g.nodes))
+	S := make([]string, 0, len(g.nodes))
 
-	S := make([]string, 0)
 	for _, n := range g.nodes {
 		if g.inputs[n] == 0 {
 			S = append(S, n)
