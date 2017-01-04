@@ -46,12 +46,16 @@ func (g *Graph) AddEdge(from, to string) bool {
 	return true
 }
 
+func (g *Graph) unsafeRemoveEdge(from, to string) {
+	delete(g.outputs[from], to)
+	g.inputs[to]--
+}
+
 func (g *Graph) RemoveEdge(from, to string) bool {
 	if _, ok := g.outputs[from]; !ok {
 		return false
 	}
-	delete(g.outputs[from], to)
-	g.inputs[to]--
+	g.unsafeRemoveEdge(from, to)
 	return true
 }
 
@@ -76,7 +80,7 @@ func (g *Graph) Toposort() ([]string, bool) {
 		}
 
 		for _, m := range ms {
-			g.RemoveEdge(n, m)
+			g.unsafeRemoveEdge(n, m)
 
 			if g.inputs[m] == 0 {
 				S = append(S, m)
