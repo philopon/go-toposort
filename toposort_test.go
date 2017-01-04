@@ -16,6 +16,22 @@ type Edge struct {
 	To   string
 }
 
+func TestDuplicatedNode(t *testing.T) {
+	graph := NewGraph(2)
+	graph.AddNode("a")
+	if graph.AddNode("a") {
+		t.Errorf("not raising duplicated node error")
+	}
+
+}
+
+func TestRemoveNotExistEdge(t *testing.T) {
+	graph := NewGraph(0)
+	if graph.RemoveEdge("a", "b") {
+		t.Errorf("not raising not exist edge error")
+	}
+}
+
 func TestWikipedia(t *testing.T) {
 	graph := NewGraph(8)
 	graph.AddNodes("2", "3", "5", "7", "8", "9", "10", "11")
