@@ -5,7 +5,7 @@ go-toposort
 
 deterministic topological sort implementation for golang
 
-example
+Example
 --
 
 ```.go
@@ -47,3 +47,7 @@ func main() {
 ```
 [3 5 7 8 11 2 9 10]
 ```
+
+License
+--
+MIT
